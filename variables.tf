@@ -5,8 +5,14 @@ variable "ami_id" {
 }
 
 # optional, default value is t3.micro. user can always override
+# t3.micro, t3.medium, t3.small
 variable "instance_type" {
   default = "t3.micro"
+  type = string
+  validation {
+    condition = contains(["t3.micro","t3.medium","t3.small"], var.instance_type)
+    error_message = "instance_type can only be t3.micro, t3.medium, t3.small"
+  }
 }
 
 # mandatory, user should supply
